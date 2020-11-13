@@ -1,0 +1,54 @@
+---
+name: cs101f2020-practical07
+break: true
+indent: 4
+---
+
+# Learn more about GatorGrader and its supported checks by visiting this web site:
+# https://github.com/GatorEducator/gatorgrader
+
+# Explanation:
+# --> a check without an "--exact" runs a count for an entity as an "at least"
+# --> checks below a file in a specified directory are for that specific file and directory
+# --> checks that appear stand-alone are for an entire Git repository
+
+# --> check the source code for various characteristics
+src:
+    main/java:
+        practicalseven/list/ArrayList.java:
+            ConfirmFileExists
+            MatchFileFragment --fragment "TODO" --count 0 --exact
+            MatchFileFragment --fragment "Add Your Name Here" --count 0 --exact
+            MatchFileFragment --fragment "package practicalseven" --count 1 --exact
+            MatchFileFragment --fragment "public abstract class" --count 0 --exact
+            MatchFileFragment --fragment "public String toString(" --count 1 --exact
+            MatchFileFragment --fragment "private class ArrayIterator" --count 1 --exact
+            MatchFileFragment --fragment "System.out.println(" --count 6
+            MatchFileFragment --fragment "list.add(" --count 1
+            MatchFileFragment --fragment "list.remove(" --count 1
+            MatchFileFragment --fragment "list.set(" --count 1
+            MatchFileFragment --fragment "list.get(" --count 1
+            MatchFileFragment --fragment "remove()" --count 1
+            MatchFileFragment --fragment "add(" --count 1
+            MatchFileFragment --fragment "set(" --count 1
+            MatchFileFragment --fragment "get(" --count 1
+    test/java:
+        practicalseven/TestArrayList.java:
+            ConfirmFileExists
+            MatchFileFragment --fragment "TODO" --count 0 --exact
+            MatchFileFragment --fragment "Add Your Name Here" --count 0 --exact
+            MatchFileFragment --fragment "package practicalseven" --count 1 --exact
+            MatchFileFragment --fragment "expected = IndexOutOfBoundsException.class" --count 1
+            MatchFileFragment --fragment "expected = NoSuchElementException.class" --count 1
+            MatchFileFragment --fragment "@Test" --count 1
+# --> check that the number of commits in the Git repository is beyond a baseline
+CountCommits --count 2
+
+# --> check that the program builds, tests, and executes correctly
+ExecuteCommand --command "gradle build"
+ExecuteCommand --command "gradle test"
+
+# --> Run the gradle run command, checking the error code and the number of lines of output
+ExecuteCommand --command "gradle -q --console plain run"
+# CountCommandOutput --command "gradle -q --console plain run" --count 6 --exact
+MatchCommandFragment --command "gradle -q --console plain run" --count 2 --fragment "removing first element" --exact
